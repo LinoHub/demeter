@@ -300,6 +300,9 @@ def read_gcam_file(gcam_data, gcam_landclasses, start_yr, end_yr, timestep, scen
     # create a list of GCAM years from header that are within the user specified year range
     model_year_list_int = list(range(start_yr, end_yr + timestep, timestep))
 
+    # Replace 2020 with 2021 if it exists in the range
+    model_year_list_int = [2021 if year == 2020 else year for year in model_year_list_int]
+                       
     # create land use area per year array converted from thousands km using area_factor
     model_year_list_str = [str(yr) for yr in model_year_list_int]
 
