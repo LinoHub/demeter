@@ -478,6 +478,11 @@ class ReadConfig:
         else:
             return [int(i) for i in yr.strip().split(';')]
 
+        # Replace 2020 → 2021 if needed
+        targets = [2021 if y == 2020 else y for y in targets]
+    
+        return sorted(set(targets))
+
     def get_outdir(self, out):
         """Create output directory unique name."""
 
