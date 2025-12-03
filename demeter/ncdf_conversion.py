@@ -52,6 +52,9 @@ class DemeterToNetcdf:
         # get a list of years to process
         self.year_list = [i for i in range(start_year, end_year + year_interval, year_interval)]
 
+        # Replace 2020 with 2021 if it exists 
+        self.year_list = [2021 if year == 2020 else year for year in self.year_list]
+
         # generate evenly-spaced coordinate pairs for the output grid based on lat, lon values
         self.longitude_list = self.generate_scaled_coordinates(xmin, xmax, ascending=True)
 
