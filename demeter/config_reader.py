@@ -467,19 +467,22 @@ class ReadConfig:
             return agg
 
     def set_target(self, t):
-        """Set target years to look for when output products.  Only the years in this list
-        will be output.  If none specified, all will be used.
-
+        """Set target years to look for when outputting products. Only the years in this list
+        will be output. If none specified, all will be used.
         """
         yr = str(t)
-
+    
         if yr.lower().strip() == 'all':
-            return range(self.start_year, self.end_year + self.timestep, self.timestep)
+            targets = list(range(self.start_year, self.end_year + self.timestep, self.timestep))
         else:
-            return [int(i) for i in yr.strip().split(';')]
-
+            targets = [int(i) for i in yr.split(';') if i.strip()]
+    
         # Replace 2020 → 2021 if needed
         targets = [2021 if y == 2020 else y for y in targets]
+    
+        # # Ensure 2021 is present
+        # if 2021 not in targets:
+        #     targets.append(2021)
     
         return sorted(set(targets))
 
